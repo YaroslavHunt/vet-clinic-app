@@ -12,9 +12,14 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Pet pet;
 
+    @ManyToOne(optional = false)
+    private Vet vet;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private LocalDateTime appointmentDate;
 
     @Column(name = "procedure_name")

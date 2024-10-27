@@ -10,14 +10,17 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String type;
 
     private String breed;
 
+    @Column(nullable = false)
     private Integer age;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Owner owner;
 }

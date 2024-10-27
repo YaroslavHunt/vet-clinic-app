@@ -12,16 +12,15 @@ public class Treatment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Pet pet;
+    @ManyToOne(optional = false)
+    private Appointment appointment;
 
-    @ManyToOne
-    private Vet vet;
-
+    @Column(nullable = false)
     private String description;
 
     private Double cost;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime treatmentDate;
 }
 
