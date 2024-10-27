@@ -17,5 +17,6 @@ public class Appointment {
 
     private LocalDateTime appointmentDate;
 
+    @Column(name = "procedure_name")
     private String procedure;
 }

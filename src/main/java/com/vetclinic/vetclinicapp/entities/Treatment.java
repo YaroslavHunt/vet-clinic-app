@@ -20,6 +20,8 @@ public class Treatment {
 
     private String description;
 
+    private Double cost;
+
     private LocalDateTime treatmentDate;
 }
 
