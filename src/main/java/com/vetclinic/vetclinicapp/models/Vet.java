@@ -1,7 +1,9 @@
-package com.vetclinic.vetclinicapp.entities;
+package com.vetclinic.vetclinicapp.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -23,4 +25,7 @@ public class Vet {
     private String specialization;
 
     private Integer experience;
+
+    @OneToMany(mappedBy = "vet", cascade = CascadeType.PERSIST)
+    private List<Appointment> appointments;
 }

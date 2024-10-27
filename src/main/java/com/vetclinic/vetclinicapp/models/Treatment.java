@@ -1,4 +1,4 @@
-package com.vetclinic.vetclinicapp.entities;
+package com.vetclinic.vetclinicapp.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -12,8 +12,13 @@ public class Treatment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "appointment_id", nullable = false)
     private Appointment appointment;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "pet_id", nullable = false)
+    private Pet pet;
 
     @Column(nullable = false)
     private String description;
