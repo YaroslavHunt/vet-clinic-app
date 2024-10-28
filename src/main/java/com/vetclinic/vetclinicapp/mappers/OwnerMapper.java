@@ -6,6 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface OwnerMapper {
-    Owner toDTO(OwnerDTO dto);
-    OwnerDTO toEntity(Owner owner);
+    Owner toEntity(OwnerDTO dto);
+    OwnerDTO toDTO(Owner owner);
 }

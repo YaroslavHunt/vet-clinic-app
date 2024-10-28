@@ -6,6 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface PetMapper {
-    Pet toDTO(PetDTO dto);
-    PetDTO tooEntity(Pet pet);
+    Pet toEntity(PetDTO dto);
+    PetDTO toDTO(Pet pet);
 }

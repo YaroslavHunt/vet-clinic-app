@@ -24,7 +24,8 @@ public class PetDTO {
     @Min(value = 0, message = "Age must be a positive number")
     private Integer age;
 
-    private OwnerDTO owner;
+    @NotNull
+    private Long ownerId;
 
     private List<AppointmentDTO> appointments;
 

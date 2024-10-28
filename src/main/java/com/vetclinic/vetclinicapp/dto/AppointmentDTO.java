@@ -14,14 +14,14 @@ public class AppointmentDTO {
 
     private Long id;
 
-    @NotBlank(message = "The pet field is required")
-    private PetDTO pet;
+    @NotBlank(message = "The pet id field is required")
+    private Long petId;
 
-    @NotBlank(message = "The vet field is required")
-    private VetDTO vet;
+    @NotBlank(message = "The vet id field is required")
+    private Long vetId;
 
     private LocalDateTime appointmentDate;
 
-    private TreatmentDTO treatment;
+    private Long treatmentId;
 
 }

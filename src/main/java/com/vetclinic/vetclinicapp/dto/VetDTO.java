@@ -2,10 +2,16 @@ package com.vetclinic.vetclinicapp.dto;
 
 import com.vetclinic.vetclinicapp.models.Appointment;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class VetDTO {
     private Long id;
 

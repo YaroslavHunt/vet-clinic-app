@@ -15,8 +15,8 @@ public class TreatmentDTO {
 
     private AppointmentDTO appointment;
 
-    @NotBlank(message = "The pet field is required")
-    private PetDTO pet;
+    @NotBlank(message = "The pet id field is required")
+    private Long petId;
 
     private String description;
 

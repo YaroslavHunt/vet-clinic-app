@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.UniqueElements;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -25,5 +25,5 @@ public class OwnerDTO {
     @UniqueElements(message = "Email must be unique")
     private String email;
 
-    private List<PetDTO> pets;
+    private Set<PetDTO> pets;
 }

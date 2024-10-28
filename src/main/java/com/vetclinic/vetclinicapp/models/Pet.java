@@ -25,7 +25,7 @@ public class Pet {
     @Column(nullable = false)
     private Integer age;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
     private Owner owner;
 

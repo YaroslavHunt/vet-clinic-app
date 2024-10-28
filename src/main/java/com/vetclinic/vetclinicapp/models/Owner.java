@@ -1,9 +1,9 @@
 package com.vetclinic.vetclinicapp.models;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -21,5 +21,5 @@ public class Owner {
     private String email;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Pet> pets;
+    private Set<Pet> pets;
 }

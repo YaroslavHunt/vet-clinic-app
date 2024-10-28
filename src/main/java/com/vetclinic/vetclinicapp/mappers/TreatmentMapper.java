@@ -6,6 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface TreatmentMapper {
-    Treatment toDTO(TreatmentDTO dto);
-    TreatmentDTO toEntity(Treatment treatment);
+    Treatment toEntity(TreatmentDTO dto);
+    TreatmentDTO toDTO(Treatment treatment);
 }
