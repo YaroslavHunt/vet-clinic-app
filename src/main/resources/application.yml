@@ -1,6 +1,6 @@
 spring:
   application:
-    name: vet-clinic-ap
+    name: Vet Clinic App
 
   datasource:
     url: "jdbc:mysql://localhost:3306/vet_clinic?createDatabaseIfNotExist=true"
