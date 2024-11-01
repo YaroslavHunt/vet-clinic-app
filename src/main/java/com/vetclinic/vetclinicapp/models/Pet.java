@@ -23,7 +23,7 @@ public class Pet {
     @Column(nullable = false)
     private Integer age;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)
     private Owner owner;
 

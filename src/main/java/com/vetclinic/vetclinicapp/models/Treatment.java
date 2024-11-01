@@ -1,6 +1,7 @@
 package com.vetclinic.vetclinicapp.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ public class Treatment {
     @JoinColumn(name = "appointment_id", nullable = false)
     private Appointment appointment;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pet_id", nullable = false)
     private Pet pet;
 

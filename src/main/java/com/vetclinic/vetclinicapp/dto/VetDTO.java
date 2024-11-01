@@ -1,10 +1,6 @@
 package com.vetclinic.vetclinicapp.dto;
 
-import com.vetclinic.vetclinicapp.models.Appointment;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +18,10 @@ public class VetDTO {
 
     @Email(message = "Invalid email format")
     @NotBlank(message = "The email field is required")
+    @Pattern(
+            regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$",
+            message = "Email must follow the format: user@example.com"
+    )
     private String email;
 
     @NotBlank(message = "The phone field is required")

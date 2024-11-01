@@ -1,7 +1,7 @@
 package com.vetclinic.vetclinicapp.services;
 
 import com.vetclinic.vetclinicapp.dto.VetDTO;
-import com.vetclinic.vetclinicapp.exceptions.ResourceNotFoundException;
+import com.vetclinic.vetclinicapp.exceptions.GlobalExceptionHandler;
 import com.vetclinic.vetclinicapp.mappers.VetMapper;
 import com.vetclinic.vetclinicapp.models.Appointment;
 import com.vetclinic.vetclinicapp.models.Vet;
@@ -42,7 +42,9 @@ public class VetService {
     public VetDTO findById(Long id) {
         Vet vet = vetRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException(String.format("Vet with id %d not found", id)));
+                        new GlobalExceptionHandler
+                                .ResourceNotFoundException(
+                                        String.format("Vet with id %d not found", id)));
         return vetMapper.toDTO(vet);
     }
 
@@ -63,7 +65,9 @@ public class VetService {
     @Transactional
     public VetDTO updateVet(Long id, VetDTO newVetData) {
         Vet existingVet = vetRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Vet with id %d not found", id)));
+                .orElseThrow(() -> new GlobalExceptionHandler
+                        .ResourceNotFoundException(
+                                String.format("Vet with id %d not found", id)));
 
         Optional.ofNullable(newVetData.getName()).ifPresent(existingVet::setName);
         Optional.ofNullable(newVetData.getEmail()).ifPresent(existingVet::setEmail);
@@ -79,11 +83,15 @@ public class VetService {
     public void addAppointmentToVet(Long vetId, Long appointmentId) {
         Vet vet = vetRepository.findById(vetId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException(String.format("Vet with id %d not found", vetId)));
+                        new GlobalExceptionHandler
+                                .ResourceNotFoundException(
+                                        String.format("Vet with id %d not found", vetId)));
 
         Appointment appointment = appointmentRepository.findById(appointmentId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException(String.format("Appointment with id %d not found", appointmentId)));
+                        new GlobalExceptionHandler
+                                .ResourceNotFoundException(
+                                        String.format("Appointment with id %d not found", appointmentId)));
 
         vet.getAppointments().add(appointment);
         appointment.setVet(vet);
@@ -94,11 +102,15 @@ public class VetService {
     public void removeAppointmentFromVet(Long vetId, Long appointmentId) {
         Vet vet = vetRepository.findById(vetId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException(String.format("Vet with id %d not found", vetId)));
+                        new GlobalExceptionHandler
+                                .ResourceNotFoundException(
+                                        String.format("Vet with id %d not found", vetId)));
 
         Appointment appointment = appointmentRepository.findById(appointmentId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException(String.format("Appointment with id %d not found", appointmentId)));
+                        new GlobalExceptionHandler
+                                .ResourceNotFoundException(
+                                        String.format("Appointment with id %d not found", appointmentId)));
 
         if (vet.getAppointments().remove(appointment)) {
             appointment.setVet(null);
@@ -110,7 +122,9 @@ public class VetService {
     public void deleteVet(Long id) {
         Vet vet = vetRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException(String.format("Vet with id %d not found", id)));
+                        new GlobalExceptionHandler
+                                .ResourceNotFoundException(
+                                        String.format("Vet with id %d not found", id)));
         vetRepository.delete(vet);
     }
 }

@@ -1,7 +1,7 @@
 package com.vetclinic.vetclinicapp.services;
 
 import com.vetclinic.vetclinicapp.dto.PetDTO;
-import com.vetclinic.vetclinicapp.exceptions.ResourceNotFoundException;
+import com.vetclinic.vetclinicapp.exceptions.GlobalExceptionHandler;
 import com.vetclinic.vetclinicapp.mappers.PetMapper;
 import com.vetclinic.vetclinicapp.models.Pet;
 import com.vetclinic.vetclinicapp.repositories.PetRepository;
@@ -27,7 +27,8 @@ public class PetService {
 
     public PetDTO getPetById(Long id) {
         Pet pet = petRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Pet not found with id: " + id));
+                .orElseThrow(() -> new GlobalExceptionHandler
+                        .ResourceNotFoundException("Pet not found with id: " + id));
         return petMapper.toDTO(pet);
     }
 
@@ -39,7 +40,8 @@ public class PetService {
 
     public PetDTO updatePet(Long id, Pet petDetails) {
         Pet existingPet = petRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Pet not found with id: " + id));
+                .orElseThrow(() -> new GlobalExceptionHandler
+                        .ResourceNotFoundException("Pet not found with id: " + id));
 
         existingPet.setName(petDetails.getName());
         existingPet.setType(petDetails.getType());
@@ -55,7 +57,8 @@ public class PetService {
 
     public void deletePet(Long id) {
         Pet pet = petRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Pet not found with id: " + id));
+                .orElseThrow(() -> new GlobalExceptionHandler
+                        .ResourceNotFoundException("Pet not found with id: " + id));
         petRepository.delete(pet);
     }
 

@@ -1,5 +1,6 @@
 package com.vetclinic.vetclinicapp.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,5 +26,5 @@ public class OwnerDTO {
     @UniqueElements(message = "Email must be unique")
     private String email;
 
-    private Set<PetDTO> pets;
+//    private Set<@Valid PetDTO> pets;
 }
