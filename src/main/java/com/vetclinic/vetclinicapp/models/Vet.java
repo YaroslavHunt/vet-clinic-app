@@ -26,6 +26,6 @@ public class Vet {
 
     private Integer experience;
 
-    @OneToMany(mappedBy = "vet", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "vet", cascade = CascadeType.ALL)
     private List<Appointment> appointments;
 }

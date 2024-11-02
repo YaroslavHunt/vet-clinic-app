@@ -1,13 +1,13 @@
 package com.vetclinic.vetclinicapp.exceptions;
 
 import com.vetclinic.vetclinicapp.constants.Constants;
+import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -20,10 +20,14 @@ public class GlobalExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public static class ResourceNotFoundException extends RuntimeException {
-        public ResourceNotFoundException(String message) {
+
+    @Getter
+    public static class CustomException extends RuntimeException {
+        private final HttpStatus status;
+
+        public CustomException(String message, HttpStatus status) {
             super(message);
+            this.status = status;
         }
     }
 
@@ -45,8 +49,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(response);
     }
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleResourceNotFound(ResourceNotFoundException ex) {
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<Map<String, String>> handleResourceNotFound(CustomException ex) {
         LocalDateTime dateTime = LocalDateTime.now();
 
         Map<String, String> response = new HashMap<>();

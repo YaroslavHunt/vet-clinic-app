@@ -9,6 +9,7 @@ import com.vetclinic.vetclinicapp.repositories.AppointmentRepository;
 import com.vetclinic.vetclinicapp.repositories.VetRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,8 +44,9 @@ public class VetService {
         Vet vet = vetRepository.findById(id)
                 .orElseThrow(() ->
                         new GlobalExceptionHandler
-                                .ResourceNotFoundException(
-                                        String.format("Vet with id %d not found", id)));
+                                .CustomException(
+                                String.format("Vet with id %d not found", id),
+                                HttpStatus.NOT_FOUND));
         return vetMapper.toDTO(vet);
     }
 
@@ -66,8 +68,9 @@ public class VetService {
     public VetDTO updateVet(Long id, VetDTO newVetData) {
         Vet existingVet = vetRepository.findById(id)
                 .orElseThrow(() -> new GlobalExceptionHandler
-                        .ResourceNotFoundException(
-                                String.format("Vet with id %d not found", id)));
+                        .CustomException(
+                        String.format("Vet with id %d not found", id),
+                        HttpStatus.NOT_FOUND));
 
         Optional.ofNullable(newVetData.getName()).ifPresent(existingVet::setName);
         Optional.ofNullable(newVetData.getEmail()).ifPresent(existingVet::setEmail);
@@ -84,14 +87,16 @@ public class VetService {
         Vet vet = vetRepository.findById(vetId)
                 .orElseThrow(() ->
                         new GlobalExceptionHandler
-                                .ResourceNotFoundException(
-                                        String.format("Vet with id %d not found", vetId)));
+                                .CustomException(
+                                String.format("Vet with id %d not found", vetId),
+                                HttpStatus.NOT_FOUND));
 
         Appointment appointment = appointmentRepository.findById(appointmentId)
                 .orElseThrow(() ->
                         new GlobalExceptionHandler
-                                .ResourceNotFoundException(
-                                        String.format("Appointment with id %d not found", appointmentId)));
+                                .CustomException(
+                                String.format("Appointment with id %d not found", appointmentId),
+                                HttpStatus.NOT_FOUND));
 
         vet.getAppointments().add(appointment);
         appointment.setVet(vet);
@@ -103,28 +108,63 @@ public class VetService {
         Vet vet = vetRepository.findById(vetId)
                 .orElseThrow(() ->
                         new GlobalExceptionHandler
-                                .ResourceNotFoundException(
-                                        String.format("Vet with id %d not found", vetId)));
+                                .CustomException(
+                                String.format("Vet with id %d not found", vetId),
+                                HttpStatus.NOT_FOUND));
 
         Appointment appointment = appointmentRepository.findById(appointmentId)
                 .orElseThrow(() ->
                         new GlobalExceptionHandler
-                                .ResourceNotFoundException(
-                                        String.format("Appointment with id %d not found", appointmentId)));
+                                .CustomException(
+                                String.format("Appointment with id %d not found", appointmentId),
+                                HttpStatus.NOT_FOUND));
 
-        if (vet.getAppointments().remove(appointment)) {
-            appointment.setVet(null);
-            vetRepository.save(vet);
-        }
+        vet.getAppointments().remove(appointment);
+        appointment.setVet(null);
+        appointmentRepository.save(appointment);
     }
 
+    @Transactional
+    public void deleteAllAppointmentsFromVet(Long vetId) {
+        Vet vet = vetRepository.findById(vetId)
+                .orElseThrow(() -> new GlobalExceptionHandler
+                        .CustomException(
+                        String.format("Vet with id %d not found", vetId),
+                        HttpStatus.NOT_FOUND));
+
+        if (vet.getAppointments().isEmpty()) {
+            throw new GlobalExceptionHandler.CustomException(
+                    "No appointments to delete for this vet",
+                    HttpStatus.NO_CONTENT);
+        }
+
+        for (Appointment appointment : vet.getAppointments()) {
+            appointment.setVet(null);
+        }
+
+        vet.getAppointments().clear();
+        vetRepository.save(vet);
+
+    }
+
+
+    @SneakyThrows
     @Transactional
     public void deleteVet(Long id) {
         Vet vet = vetRepository.findById(id)
                 .orElseThrow(() ->
                         new GlobalExceptionHandler
-                                .ResourceNotFoundException(
-                                        String.format("Vet with id %d not found", id)));
+                                .CustomException(
+                                String.format("Vet with id %d not found", id),
+                                HttpStatus.NOT_FOUND));
+
+        if (!vet.getAppointments().isEmpty()) {
+            throw new GlobalExceptionHandler.CustomException(
+                    "Cannot delete this vet, as they have appointments scheduled",
+                    HttpStatus.CONFLICT);
+        }
+
         vetRepository.delete(vet);
+
     }
 }

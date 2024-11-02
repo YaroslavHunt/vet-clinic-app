@@ -60,6 +60,14 @@ public class VetController {
         return ResponseEntity.status(NO_CONTENT).build();
     }
 
+    @DeleteMapping("/{id}/appointments")
+    // {{host}}/vets/{vetId}/appointments - delete all appointments from vet
+    public ResponseEntity<Void> deleteAllAppointments(@PathVariable Long id) {
+        vetService.deleteAllAppointmentsFromVet(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+
     @PostMapping("/save")
     // {{host}}/vets/save + (POST body.json) - add new vet
     public ResponseEntity<VetDTO> add(@RequestBody @Valid VetDTO vetDTO) {

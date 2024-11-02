@@ -1,9 +1,7 @@
 package com.vetclinic.vetclinicapp.services;
 
 import com.vetclinic.vetclinicapp.dto.PetDTO;
-import com.vetclinic.vetclinicapp.exceptions.GlobalExceptionHandler;
 import com.vetclinic.vetclinicapp.mappers.PetMapper;
-import com.vetclinic.vetclinicapp.models.Pet;
 import com.vetclinic.vetclinicapp.repositories.PetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,41 +23,39 @@ public class PetService {
                 .collect(Collectors.toList());
     }
 
-    public PetDTO getPetById(Long id) {
-        Pet pet = petRepository.findById(id)
-                .orElseThrow(() -> new GlobalExceptionHandler
-                        .ResourceNotFoundException("Pet not found with id: " + id));
-        return petMapper.toDTO(pet);
-    }
+//    public PetDTO getPetById(Long id) {
+//        Pet pet = petRepository.findById(id)
+//                .orElseThrow(() -> new GlobalExceptionHandler
+//                        .ResourceNotFoundException("Pet not found with id: " + id));
+//        return petMapper.toDTO(pet);
+//    }
 
-    public PetDTO addPet(PetDTO petDTO) {
-        Pet pet = petMapper.toEntity(petDTO);
-        Pet savedPet = petRepository.save(pet);
-        return petMapper.toDTO(savedPet);
-    }
+//    public PetDTO addPet(PetDTO petDTO) {
+//        Pet pet = petMapper.toEntity(petDTO);
+//        Pet savedPet = petRepository.save(pet);
+//        return petMapper.toDTO(savedPet);
+//    }
 
-    public PetDTO updatePet(Long id, Pet petDetails) {
-        Pet existingPet = petRepository.findById(id)
-                .orElseThrow(() -> new GlobalExceptionHandler
-                        .ResourceNotFoundException("Pet not found with id: " + id));
-
-        existingPet.setName(petDetails.getName());
-        existingPet.setType(petDetails.getType());
-        existingPet.setBreed(petDetails.getBreed());
-        existingPet.setAge(petDetails.getAge());
-        if (petDetails.getOwner() != null) {
-            existingPet.setOwner(petDetails.getOwner());
-        }
-
-        Pet updatedPet = petRepository.save(existingPet);
-        return petMapper.toDTO(updatedPet);
-    }
-
-    public void deletePet(Long id) {
-        Pet pet = petRepository.findById(id)
-                .orElseThrow(() -> new GlobalExceptionHandler
-                        .ResourceNotFoundException("Pet not found with id: " + id));
-        petRepository.delete(pet);
-    }
+//    public PetDTO updatePet(Long id, Pet petDetails) {
+//        Pet existingPet = petRepository.findById(id);
+//
+//        existingPet.setName(petDetails.getName());
+//        existingPet.setType(petDetails.getType());
+//        existingPet.setBreed(petDetails.getBreed());
+//        existingPet.setAge(petDetails.getAge());
+//        if (petDetails.getOwner() != null) {
+//            existingPet.setOwner(petDetails.getOwner());
+//        }
+//
+//        Pet updatedPet = petRepository.save(existingPet);
+//        return petMapper.toDTO(updatedPet);
+//    }
+//
+//    public void deletePet(Long id) {
+//        Pet pet = petRepository.findById(id)
+//                .orElseThrow(() -> new GlobalExceptionHandler
+//                        .ResourceNotFoundException("Pet not found with id: " + id));
+//        petRepository.delete(pet);
+//    }
 
 }

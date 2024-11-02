@@ -17,7 +17,7 @@ public class Appointment {
     private Pet pet;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "vet_id", nullable = false)
+    @JoinColumn(name = "vet_id")
     private Vet vet;
 
     @Temporal(TemporalType.TIMESTAMP)
