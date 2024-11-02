@@ -1,5 +1,6 @@
-package com.vetclinic.vetclinicapp.dto;
+package com.vetclinic.vetclinicapp.dto.vet;
 
+import com.vetclinic.vetclinicapp.dto.appointment.VetAppointmentDTO;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,5 +40,5 @@ public class VetDTO {
     @Max(value = 70, message = "Experience can't be greater than 70 year")
     private Integer experience;
 
-    private List<AppointmentDTO> appointments;
+    private List<VetAppointmentDTO> appointments;
 }

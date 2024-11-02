@@ -1,4 +1,4 @@
-package com.vetclinic.vetclinicapp.dto;
+package com.vetclinic.vetclinicapp.dto.pet;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

@@ -1,6 +1,6 @@
 package com.vetclinic.vetclinicapp.controllers;
 
-import com.vetclinic.vetclinicapp.dto.TreatmentDTO;
+import com.vetclinic.vetclinicapp.dto.treatment.TreatmentDTO;
 import com.vetclinic.vetclinicapp.models.Treatment;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

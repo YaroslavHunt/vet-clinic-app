@@ -1,6 +1,6 @@
 package com.vetclinic.vetclinicapp.mappers;
 
-import com.vetclinic.vetclinicapp.dto.PetDTO;
+import com.vetclinic.vetclinicapp.dto.pet.PetDTO;
 import com.vetclinic.vetclinicapp.models.Pet;
 import org.mapstruct.Mapper;
 

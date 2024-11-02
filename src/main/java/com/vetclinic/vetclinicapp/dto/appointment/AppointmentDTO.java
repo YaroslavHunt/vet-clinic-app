@@ -1,4 +1,4 @@
-package com.vetclinic.vetclinicapp.dto;
+package com.vetclinic.vetclinicapp.dto.appointment;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -8,19 +8,19 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class TreatmentDTO {
-    private Long id;
+@AllArgsConstructor
+public class AppointmentDTO {
 
-    private AppointmentDTO appointment;
+    private Long id;
 
     @NotBlank(message = "The pet id field is required")
     private Long petId;
 
-    private String description;
+    @NotBlank(message = "The vet id field is required")
+    private Long vetId;
 
-    private Double cost;
+    private LocalDateTime appointmentDate;
 
-    private LocalDateTime treatmentDate;
+    private Long treatmentId;
 }

@@ -1,6 +1,6 @@
 package com.vetclinic.vetclinicapp.controllers;
 
-import com.vetclinic.vetclinicapp.dto.PetDTO;
+import com.vetclinic.vetclinicapp.dto.pet.PetDTO;
 import com.vetclinic.vetclinicapp.services.PetService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

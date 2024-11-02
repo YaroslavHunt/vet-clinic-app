@@ -1,6 +1,6 @@
 package com.vetclinic.vetclinicapp.controllers;
 
-import com.vetclinic.vetclinicapp.dto.OwnerDTO;
+import com.vetclinic.vetclinicapp.dto.owner.OwnerDTO;
 import com.vetclinic.vetclinicapp.models.Owner;
 import com.vetclinic.vetclinicapp.services.OwnerService;
 import jakarta.validation.Valid;

@@ -1,6 +1,6 @@
 package com.vetclinic.vetclinicapp.services;
 
-import com.vetclinic.vetclinicapp.dto.VetDTO;
+import com.vetclinic.vetclinicapp.dto.vet.VetDTO;
 import com.vetclinic.vetclinicapp.exceptions.GlobalExceptionHandler;
 import com.vetclinic.vetclinicapp.mappers.VetMapper;
 import com.vetclinic.vetclinicapp.models.Appointment;

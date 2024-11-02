@@ -1,6 +1,6 @@
 package com.vetclinic.vetclinicapp.services;
 
-import com.vetclinic.vetclinicapp.dto.PetDTO;
+import com.vetclinic.vetclinicapp.dto.pet.PetDTO;
 import com.vetclinic.vetclinicapp.mappers.PetMapper;
 import com.vetclinic.vetclinicapp.repositories.PetRepository;
 import lombok.RequiredArgsConstructor;
