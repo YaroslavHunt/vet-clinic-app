@@ -46,7 +46,7 @@ public class GlobalExceptionHandler {
 
         logger.error("Error occurred: Validation exception, field errors: {}", errorMessages);
 
-        return ResponseEntity.badRequest().body(response);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
     @ExceptionHandler(CustomException.class)

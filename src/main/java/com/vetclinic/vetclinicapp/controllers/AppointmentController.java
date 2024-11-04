@@ -25,8 +25,8 @@ public class AppointmentController {
     public ResponseEntity<List<AppointmentDTO>> getAll(
             @RequestParam(required = false) Long vetId,
             @RequestParam(required = false) Long petId,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date
+    ) {
         List<AppointmentDTO> appointments = appointmentService.findFilteredAppointments(vetId, petId, date);
         return appointments.isEmpty()
                 ? ResponseEntity.status(HttpStatus.NO_CONTENT).build()
