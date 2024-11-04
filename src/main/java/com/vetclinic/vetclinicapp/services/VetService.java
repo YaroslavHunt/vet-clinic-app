@@ -5,7 +5,6 @@ import com.vetclinic.vetclinicapp.exceptions.GlobalExceptionHandler;
 import com.vetclinic.vetclinicapp.mappers.VetMapper;
 import com.vetclinic.vetclinicapp.models.Appointment;
 import com.vetclinic.vetclinicapp.models.Vet;
-import com.vetclinic.vetclinicapp.repositories.AppointmentRepository;
 import com.vetclinic.vetclinicapp.repositories.VetRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -23,7 +22,6 @@ import java.util.stream.Collectors;
 public class VetService {
 
     private final VetRepository vetRepository;
-    private final AppointmentRepository appointmentRepository;
     private final VetMapper vetMapper;
 
     public List<VetDTO> findAll() {

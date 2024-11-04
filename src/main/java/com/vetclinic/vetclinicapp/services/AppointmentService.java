@@ -4,7 +4,6 @@ import com.vetclinic.vetclinicapp.dto.appointment.AppointmentDTO;
 import com.vetclinic.vetclinicapp.exceptions.GlobalExceptionHandler;
 import com.vetclinic.vetclinicapp.mappers.AppointmentMapper;
 import com.vetclinic.vetclinicapp.models.Appointment;
-import com.vetclinic.vetclinicapp.models.Treatment;
 import com.vetclinic.vetclinicapp.models.Vet;
 import com.vetclinic.vetclinicapp.repositories.AppointmentRepository;
 import com.vetclinic.vetclinicapp.repositories.PetRepository;
