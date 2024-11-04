@@ -14,7 +14,7 @@ public class Treatment {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "appointment_id", nullable = false)
+    @JoinColumn(name = "appointment_id")
     private Appointment appointment;
 
     @ManyToOne(fetch = FetchType.LAZY)

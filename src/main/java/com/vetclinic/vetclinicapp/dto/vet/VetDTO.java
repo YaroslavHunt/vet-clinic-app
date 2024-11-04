@@ -1,6 +1,6 @@
 package com.vetclinic.vetclinicapp.dto.vet;
 
-import com.vetclinic.vetclinicapp.dto.appointment.VetAppointmentDTO;
+import com.vetclinic.vetclinicapp.dto.appointment.AnyAppointmentDTO;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,8 +27,8 @@ public class VetDTO {
 
     @NotBlank(message = "The phone field is required")
     @Pattern(
-            regexp = "^(\\d{3}-\\d{2}-\\d{2}-\\d{3}|\\d{10})$",
-            message = "Phone number must be in the format: 123-45-67-890 or 1234567890"
+            regexp = "^\\+?\\d{10,15}$\n",
+            message = "Phone number must be in the format: +1234567890 or 1234567890"
     )
     private String phone;
 
@@ -40,5 +40,5 @@ public class VetDTO {
     @Max(value = 70, message = "Experience can't be greater than 70 year")
     private Integer experience;
 
-    private List<VetAppointmentDTO> appointments;
+    private List<AnyAppointmentDTO> appointments;
 }

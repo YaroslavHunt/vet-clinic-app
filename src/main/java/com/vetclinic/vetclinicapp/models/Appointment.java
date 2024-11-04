@@ -24,6 +24,6 @@ public class Appointment {
     @Column(nullable = false)
     private LocalDateTime appointmentDate;
 
-    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "appointment")
     private Treatment treatment;
 }

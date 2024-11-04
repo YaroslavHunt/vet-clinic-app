@@ -15,9 +15,10 @@ public interface AppointmentMapper {
     @Mapping(target = "vetId", source = "vet.id")
     AppointmentDTO toDTO(Appointment appointment);
 
-    @Mapping(target = "pet", source = "dto.petId")
-    @Mapping(target = "vet", source = "dto.vetId")
+    @Mapping(target = "pet.id", source = "dto.petId")
+    @Mapping(target = "vet.id", source = "dto.vetId")
     Appointment toEntity(AppointmentDTO dto);
+
 
     default List<AppointmentDTO> toDTOs(Collection<Appointment> appointments) {
         return appointments.stream()

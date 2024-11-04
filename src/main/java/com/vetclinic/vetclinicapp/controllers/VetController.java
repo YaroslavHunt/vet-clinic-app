@@ -38,29 +38,6 @@ public class VetController {
         return ResponseEntity.ok(vet);
     }
 
-    @PostMapping("/{vetId}")
-    public ResponseEntity<Void> addAppointment(
-            @PathVariable Long vetId,
-            @RequestParam(name = "add_appointment") Long appointmentId) {
-        vetService.addAppointmentToVet(vetId, appointmentId);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
-    }
-
-    @DeleteMapping("/{vetId}")
-    public ResponseEntity<Void> removeAppointment(
-            @PathVariable Long vetId,
-            @RequestParam(name = "remove_appointment") Long appointmentId) {
-        vetService.removeAppointmentFromVet(vetId, appointmentId);
-        return ResponseEntity.status(NO_CONTENT).build();
-    }
-
-    @DeleteMapping("/{id}/appointments")
-    public ResponseEntity<Void> deleteAllAppointments(@PathVariable Long id) {
-        vetService.deleteAllAppointmentsFromVet(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
-
-
     @PostMapping("/save")
     public ResponseEntity<VetDTO> add(@RequestBody @Valid VetDTO vetDTO) {
         VetDTO createdVet = vetService.addVet(vetDTO);
@@ -74,6 +51,11 @@ public class VetController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(updatedVet);
     }
 
+    @DeleteMapping("/{id}/appointments")
+    public ResponseEntity<Void> deleteAllAppointmentsFromVet(@PathVariable Long id) {
+        vetService.deleteAllAppointmentsFromVet(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

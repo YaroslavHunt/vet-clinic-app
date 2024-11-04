@@ -83,48 +83,6 @@ public class VetService {
     }
 
     @Transactional
-    public void addAppointmentToVet(Long vetId, Long appointmentId) {
-        Vet vet = vetRepository.findById(vetId)
-                .orElseThrow(() ->
-                        new GlobalExceptionHandler
-                                .CustomException(
-                                String.format("Vet with id %d not found", vetId),
-                                HttpStatus.NOT_FOUND));
-
-        Appointment appointment = appointmentRepository.findById(appointmentId)
-                .orElseThrow(() ->
-                        new GlobalExceptionHandler
-                                .CustomException(
-                                String.format("Appointment with id %d not found", appointmentId),
-                                HttpStatus.NOT_FOUND));
-
-        vet.getAppointments().add(appointment);
-        appointment.setVet(vet);
-        vetRepository.save(vet);
-    }
-
-    @Transactional
-    public void removeAppointmentFromVet(Long vetId, Long appointmentId) {
-        Vet vet = vetRepository.findById(vetId)
-                .orElseThrow(() ->
-                        new GlobalExceptionHandler
-                                .CustomException(
-                                String.format("Vet with id %d not found", vetId),
-                                HttpStatus.NOT_FOUND));
-
-        Appointment appointment = appointmentRepository.findById(appointmentId)
-                .orElseThrow(() ->
-                        new GlobalExceptionHandler
-                                .CustomException(
-                                String.format("Appointment with id %d not found", appointmentId),
-                                HttpStatus.NOT_FOUND));
-
-        vet.getAppointments().remove(appointment);
-        appointment.setVet(null);
-        appointmentRepository.save(appointment);
-    }
-
-    @Transactional
     public void deleteAllAppointmentsFromVet(Long vetId) {
         Vet vet = vetRepository.findById(vetId)
                 .orElseThrow(() -> new GlobalExceptionHandler
@@ -144,9 +102,7 @@ public class VetService {
 
         vet.getAppointments().clear();
         vetRepository.save(vet);
-
     }
-
 
     @SneakyThrows
     @Transactional

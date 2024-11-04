@@ -1,7 +1,6 @@
 package com.vetclinic.vetclinicapp.controllers;
 
 import com.vetclinic.vetclinicapp.dto.appointment.AppointmentDTO;
-import com.vetclinic.vetclinicapp.models.Appointment;
 import com.vetclinic.vetclinicapp.services.AppointmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
 @RequestMapping("/appointments")
@@ -35,20 +35,45 @@ public class AppointmentController {
 
     @GetMapping("/{id}")
     public ResponseEntity<AppointmentDTO> getAppointment(@PathVariable Long id) {
-        return null;
+        AppointmentDTO dto = appointmentService.findAppointmentById(id);
+        return ResponseEntity.ok(dto);
     }
 
     @PostMapping("/save")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestBody @Valid Appointment appointment) {}
+    public ResponseEntity<AppointmentDTO> add(@RequestBody @Valid AppointmentDTO dto) {
+        AppointmentDTO createdAppointment = appointmentService.addAppointment(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdAppointment);
+    }
 
     @PatchMapping("/change/{id}")
-    public ResponseEntity<AppointmentDTO> change(@RequestBody AppointmentDTO appointment, @PathVariable Long id){
-        return null;
+    public ResponseEntity<AppointmentDTO> change(
+            @RequestBody @Valid AppointmentDTO appointment,
+            @PathVariable Long id
+    ){
+        AppointmentDTO dto = appointmentService.changeAppointment(id, appointment);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(dto);
+    }
+
+    @PostMapping("/vet={vetId}")
+    public ResponseEntity<Void> addAppointmentToVet(
+            @PathVariable Long vetId,
+            @RequestParam(name = "add_appointment") Long appointmentId) {
+        appointmentService.addAppointmentToVet(vetId, appointmentId);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    @DeleteMapping("/vet={vetId}")
+    public ResponseEntity<Void> removeAppointmentFromVet(
+            @PathVariable Long vetId,
+            @RequestParam(name = "remove_appointment") Long appointmentId) {
+        appointmentService.removeAppointmentFromVet(vetId, appointmentId);
+        return ResponseEntity.status(NO_CONTENT).build();
     }
 
     @DeleteMapping("/delete/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {}
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        appointmentService.deleteAppointment(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 
 }
