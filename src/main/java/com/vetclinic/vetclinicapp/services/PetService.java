@@ -80,8 +80,8 @@ public class PetService {
                                 HttpStatus.NOT_FOUND)))
                 .ifPresent(existingPet::setOwner);
 
-        Pet updatedPet = petRepository.save(existingPet);
-        return petMapper.toAnyDTO(updatedPet);
+        petRepository.save(existingPet);
+        return petMapper.toAnyDTO(existingPet);
     }
 
     public void deletePet(Long id) {

@@ -1,5 +1,6 @@
 package com.vetclinic.vetclinicapp.dto.vet;
 
+import com.vetclinic.vetclinicapp.constants.Constants;
 import com.vetclinic.vetclinicapp.dto.appointment.AnyAppointmentDTO;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -20,15 +21,15 @@ public class VetDTO {
     @Email(message = "Invalid email format")
     @NotBlank(message = "The email field is required")
     @Pattern(
-            regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+            regexp = Constants.EMAIL_REGEX,
             message = "Email must follow the format: user@example.com"
     )
     private String email;
 
     @NotBlank(message = "The phone field is required")
     @Pattern(
-            regexp = "^\\+?\\d{10,15}$\n",
-            message = "Phone number must be in the format: +1234567890 or 1234567890"
+            regexp = Constants.PHONE_NUMBER_REGEX,
+            message = "Invalid phone number format. Valid formats are: " + Constants.PHONE_NUMBER_FORMATS
     )
     private String phone;
 

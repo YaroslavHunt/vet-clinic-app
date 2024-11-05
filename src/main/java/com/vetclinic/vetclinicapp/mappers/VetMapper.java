@@ -7,6 +7,5 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface VetMapper {
     Vet toEntity(VetDTO dto);
-
     VetDTO toDTO(Vet vet);
 }
