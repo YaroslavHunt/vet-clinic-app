@@ -1,7 +1,5 @@
 package com.vetclinic.vetclinicapp.dto.pet;
 
-import com.vetclinic.vetclinicapp.dto.appointment.AppointmentDTO;
-import com.vetclinic.vetclinicapp.dto.treatment.TreatmentDTO;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,12 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PetDTO {
+public class AnyPetDTO {
 
     private Long id;
 
@@ -32,9 +28,5 @@ public class PetDTO {
 
     @NotNull
     private Long ownerId;
-
-    private List<AppointmentDTO> appointments;
-
-    private List<TreatmentDTO> treatments;
 
 }

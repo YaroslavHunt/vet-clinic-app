@@ -30,6 +30,6 @@ public class Pet {
     @OneToMany(mappedBy = "pet", cascade = CascadeType.PERSIST)
     private List<Appointment> appointments;
 
-    @OneToMany(mappedBy = "pet", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.PERSIST)
     private List<Treatment> treatments;
 }
