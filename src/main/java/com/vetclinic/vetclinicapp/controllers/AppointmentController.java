@@ -19,7 +19,7 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 @RequiredArgsConstructor
 public class AppointmentController {
 
-    public final AppointmentService appointmentService;
+    private final AppointmentService appointmentService;
 
     @GetMapping
     public ResponseEntity<List<AppointmentDTO>> getAll(
