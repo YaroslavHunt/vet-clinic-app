@@ -1,6 +1,7 @@
 package com.vetclinic.vetclinicapp.dto.appointment;
 
 import com.vetclinic.vetclinicapp.dto.treatment.AnyTreatmentDTO;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class AppointmentDTO {
     @NotNull(message = "The vet id field is required")
     private Long vetId;
 
+    @FutureOrPresent(message = "Appointment date must be in the present or future")
     private LocalDateTime appointmentDate;
 
     private AnyTreatmentDTO treatment;

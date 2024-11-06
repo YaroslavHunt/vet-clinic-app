@@ -90,7 +90,12 @@ public class TreatmentService {
         treatment.setCost(dto.getCost());
         treatment.setDescription(dto.getDescription());
         treatment.setPet(pet);
-        treatment.setTreatmentDate(dto.getTreatmentDate());
+
+        if (dto.getTreatmentDate() != null) {
+            treatment.setTreatmentDate(dto.getTreatmentDate());
+        } else {
+            treatment.setTreatmentDate(LocalDateTime.now());
+        }
 
         if (dto.getAppointmentId() != null) {
             if (appointmentRepository.existsById(dto.getAppointmentId())) {
