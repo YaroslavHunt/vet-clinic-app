@@ -2,8 +2,7 @@ package com.vetclinic.vetclinicapp.exceptions;
 
 import com.vetclinic.vetclinicapp.constants.Constants;
 import lombok.Getter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,10 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
-
-    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
 
     @Getter
     public static class CustomException extends RuntimeException {
@@ -44,7 +41,7 @@ public class GlobalExceptionHandler {
         response.put("message:", errorMessages);
         response.put("errorCode", "METHOD_ARGUMENT_NOT_VALID_EXCEPTION");
 
-        logger.error("Error occurred: Validation exception, field errors: {}", errorMessages);
+        log.error("Error occurred: Validation exception, field errors: {}", errorMessages);
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
@@ -58,7 +55,7 @@ public class GlobalExceptionHandler {
         response.put("message", ex.getMessage());
         response.put("errorCode", "RESOURCE_NOT_FOUND_EXCEPTION");
 
-        logger.error("Error occurred: Resource not found, message: {}", ex.getMessage());
+        log.error("Error occurred: Resource not found, message: {}", ex.getMessage());
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
@@ -72,7 +69,7 @@ public class GlobalExceptionHandler {
         response.put("message", ex.getMessage());
         response.put("errorCode", "SQL_INTEGRITY_CONSTRAINT_VIOLATION");
 
-        logger.error("Error occurred: SQL integrity constraint violation, message: {}", ex.getMessage());
+        log.error("Error occurred: SQL integrity constraint violation, message: {}", ex.getMessage());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
@@ -86,7 +83,7 @@ public class GlobalExceptionHandler {
         response.put("message", "An unexpected error occurred: " + ex.getMessage());
         response.put("errorCode", "GENERAL_EXCEPTION");
 
-        logger.error("Error occurred: Unexpected exception, message: {}", ex.getMessage(), ex);
+        log.error("Error occurred: Unexpected exception, message: {}", ex.getMessage(), ex);
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }

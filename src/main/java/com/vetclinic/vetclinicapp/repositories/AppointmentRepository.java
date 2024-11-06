@@ -19,12 +19,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
     List<Appointment> findAllByVetIdAndPetId(Long vetId, Long petId);
 
-    @Query("SELECT a FROM Appointment a WHERE a.appointmentDate >= :startOfDay AND a.appointmentDate < :endOfDay")
     Collection<Appointment> findAllByAppointmentDate(
             @Param("startOfDay") LocalDateTime startOfDay,
             @Param("endOfDay") LocalDateTime endOfDay
     );
 
-
+    List<Appointment> findByPetIdAndAppointmentDateBefore(Long petId, LocalDateTime date);
 
 }
