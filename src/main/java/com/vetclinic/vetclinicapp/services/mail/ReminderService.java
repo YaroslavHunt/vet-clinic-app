@@ -1,9 +1,7 @@
 package com.vetclinic.vetclinicapp.services.mail;
 
-import com.vetclinic.vetclinicapp.models.Appointment;
 import com.vetclinic.vetclinicapp.models.Owner;
 import com.vetclinic.vetclinicapp.models.Pet;
-import com.vetclinic.vetclinicapp.repositories.AppointmentRepository;
 import com.vetclinic.vetclinicapp.repositories.PetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -16,7 +14,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReminderService {
 
-    private final AppointmentRepository appointmentRepository;
     private final PetRepository petRepository;
     private final EmailService emailService;
 
@@ -24,16 +21,11 @@ public class ReminderService {
     public void sendYearlyReminderEmails() {
         LocalDateTime oneYearAgo = LocalDateTime.now().minusYears(1);
 
-        List<Pet> pets = petRepository.findAll();
+        List<Pet> petsWithOldAppointments = petRepository.findPetsWithLastAppointmentOlderThanOneYear(oneYearAgo);
 
-        for (Pet pet : pets) {
-            List<Appointment> oldAppointments = appointmentRepository
-                    .findByPetIdAndAppointmentDateBefore(pet.getId(), oneYearAgo);
-
-            if (!oldAppointments.isEmpty()) {
-                Owner owner = pet.getOwner();
-                emailService.sendReminderEmail(owner.getEmail(), pet.getName());
-            }
+        for (Pet pet : petsWithOldAppointments) {
+            Owner owner = pet.getOwner();
+            emailService.sendReminderEmail(owner.getEmail(), pet.getName());
         }
     }
 }
