@@ -1,8 +1,8 @@
-package com.vetclinic.vetclinicapp.services.mail;
+package com.vetclinic.vetclinicapp.service.mail;
 
 import com.vetclinic.vetclinicapp.models.Owner;
 import com.vetclinic.vetclinicapp.models.Pet;
-import com.vetclinic.vetclinicapp.repositories.PetRepository;
+import com.vetclinic.vetclinicapp.repository.PetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;

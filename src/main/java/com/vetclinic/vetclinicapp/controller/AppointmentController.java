@@ -1,7 +1,7 @@
-package com.vetclinic.vetclinicapp.controllers;
+package com.vetclinic.vetclinicapp.controller;
 
 import com.vetclinic.vetclinicapp.dto.appointment.AppointmentDTO;
-import com.vetclinic.vetclinicapp.services.AppointmentService;
+import com.vetclinic.vetclinicapp.service.AppointmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;

@@ -1,8 +1,8 @@
-package com.vetclinic.vetclinicapp.controllers;
+package com.vetclinic.vetclinicapp.controller;
 
 import com.vetclinic.vetclinicapp.dto.treatment.AnyTreatmentDTO;
 import com.vetclinic.vetclinicapp.dto.treatment.TreatmentDTO;
-import com.vetclinic.vetclinicapp.services.TreatmentService;
+import com.vetclinic.vetclinicapp.service.TreatmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

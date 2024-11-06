@@ -1,4 +1,4 @@
-package com.vetclinic.vetclinicapp.mappers;
+package com.vetclinic.vetclinicapp.mapper;
 
 import com.vetclinic.vetclinicapp.dto.appointment.AppointmentDTO;
 import com.vetclinic.vetclinicapp.models.Appointment;

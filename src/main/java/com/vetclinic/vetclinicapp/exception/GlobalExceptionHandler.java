@@ -1,4 +1,4 @@
-package com.vetclinic.vetclinicapp.exceptions;
+package com.vetclinic.vetclinicapp.exception;
 
 import com.vetclinic.vetclinicapp.constants.Constants;
 import lombok.Getter;

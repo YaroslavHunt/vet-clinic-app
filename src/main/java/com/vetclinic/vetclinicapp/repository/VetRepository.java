@@ -1,4 +1,4 @@
-package com.vetclinic.vetclinicapp.repositories;
+package com.vetclinic.vetclinicapp.repository;
 
 import com.vetclinic.vetclinicapp.models.Vet;
 import org.springframework.data.jpa.repository.JpaRepository;

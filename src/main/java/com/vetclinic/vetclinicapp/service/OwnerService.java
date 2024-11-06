@@ -1,10 +1,10 @@
-package com.vetclinic.vetclinicapp.services;
+package com.vetclinic.vetclinicapp.service;
 
 import com.vetclinic.vetclinicapp.dto.owner.OwnerDTO;
-import com.vetclinic.vetclinicapp.exceptions.GlobalExceptionHandler;
-import com.vetclinic.vetclinicapp.mappers.OwnerMapper;
+import com.vetclinic.vetclinicapp.exception.GlobalExceptionHandler;
+import com.vetclinic.vetclinicapp.mapper.OwnerMapper;
 import com.vetclinic.vetclinicapp.models.Owner;
-import com.vetclinic.vetclinicapp.repositories.OwnerRepository;
+import com.vetclinic.vetclinicapp.repository.OwnerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

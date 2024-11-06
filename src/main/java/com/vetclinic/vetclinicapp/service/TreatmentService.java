@@ -1,15 +1,15 @@
-package com.vetclinic.vetclinicapp.services;
+package com.vetclinic.vetclinicapp.service;
 
 import com.vetclinic.vetclinicapp.dto.treatment.AnyTreatmentDTO;
 import com.vetclinic.vetclinicapp.dto.treatment.TreatmentDTO;
-import com.vetclinic.vetclinicapp.exceptions.GlobalExceptionHandler;
-import com.vetclinic.vetclinicapp.mappers.TreatmentMapper;
+import com.vetclinic.vetclinicapp.exception.GlobalExceptionHandler;
+import com.vetclinic.vetclinicapp.mapper.TreatmentMapper;
 import com.vetclinic.vetclinicapp.models.Appointment;
 import com.vetclinic.vetclinicapp.models.Pet;
 import com.vetclinic.vetclinicapp.models.Treatment;
-import com.vetclinic.vetclinicapp.repositories.AppointmentRepository;
-import com.vetclinic.vetclinicapp.repositories.PetRepository;
-import com.vetclinic.vetclinicapp.repositories.TreatmentRepository;
+import com.vetclinic.vetclinicapp.repository.AppointmentRepository;
+import com.vetclinic.vetclinicapp.repository.PetRepository;
+import com.vetclinic.vetclinicapp.repository.TreatmentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.vetclinic.vetclinicapp.services.mail;
+package com.vetclinic.vetclinicapp.service.mail;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
