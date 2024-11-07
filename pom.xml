@@ -31,7 +31,18 @@
         <java.version>17</java.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+
         <jjwt.version>0.11.5</jjwt.version>
+
+        <jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
+        <swagger-annotations.version>2.2.20</swagger-annotations.version>
+
+        <openapi-generator.version>7.2.0</openapi-generator.version>
+
+        <vet-clinic-app-openapi-spec.path>
+            ${project.basedir}/src/main/resources/spec/vet-clinic-app.openapi.yaml
+        </vet-clinic-app-openapi-spec.path>
+        <api-package>com.vetclinic.vetclinicapp.api</api-package>
     </properties>
 
     <dependencies>
@@ -98,6 +109,13 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <!-- JWT -->
+
+        <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
             <version>${jjwt.version}</version>
@@ -113,9 +131,22 @@
             <version>${jjwt.version}</version>
         </dependency>
 
+        <!-- openAPI -->
+
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>${jackson-databind-nullable.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-annotations.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.0.3</version>
         </dependency>
 
     </dependencies>
@@ -126,6 +157,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!-- mapstruct -->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -155,6 +188,52 @@
                         </compilerArg>
                     </compilerArgs>
                 </configuration>
+            </plugin>
+
+            <!-- openAPI -->
+
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi-generator.version}</version> <!-- important for Spring Boot 3.x -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+
+                        <id>generate-api</id>
+
+                        <configuration>
+                            <inputSpec>${vet-clinic-app-openapi-spec.path}</inputSpec>
+
+                            <!--https://openapi-generator.tech/docs/generators/spring -->
+                            <generatorName>spring</generatorName>
+                            <library>spring-boot</library>
+
+                            <!--                            <modelNameSuffix>DTO</modelNameSuffix>-->
+                            <generateApis>true</generateApis>
+                            <generateModels>true</generateModels>
+
+                            <!-- ... a lot of other parameters here if needed -->
+
+                            <!-- configuration -->
+                            <configOptions>
+                                <interfaceOnly>true</interfaceOnly>
+                                <skipDefaultInterface>true</skipDefaultInterface>
+                                <useBeanValidation>true</useBeanValidation>
+                                <performBeanValidation>true</performBeanValidation>
+                                <modelPackage>${api-package}.dto</modelPackage>
+                                <apiPackage>${api-package}.controller</apiPackage>
+                                <useJakartaEe>true</useJakartaEe> <!-- important for Spring Boot 3.x -->
+                                <useSpringBoot3>true</useSpringBoot3> <!-- important for Spring Boot 3.x -->
+                                <sourceFolder>/src/main/java</sourceFolder>
+                                <implFolder>/src/main/java</implFolder>
+                                <serializableModel>true</serializableModel>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
