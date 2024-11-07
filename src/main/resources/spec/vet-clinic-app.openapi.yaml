@@ -1,1305 +1,835 @@
-{
-  "openapi": "3.0.1",
-  "info": {
-    "title": "OpenAPI definition",
-    "version": "v0"
-  },
-  "servers": [
-    {
-      "url": "http://localhost:8080",
-      "description": "Generated server url"
-    }
-  ],
-  "paths": {
-    "/vets/save": {
-      "post": {
-        "tags": [
-          "vet-controller"
-        ],
-        "operationId": "add",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VetDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/VetDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/treatments/save": {
-      "post": {
-        "tags": [
-          "treatment-controller"
-        ],
-        "operationId": "add_1",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TreatmentDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/AnyTreatmentDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/pets/save": {
-      "post": {
-        "tags": [
-          "pet-controller"
-        ],
-        "operationId": "add_2",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AnyPetDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/AnyPetDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/owners/save": {
-      "post": {
-        "tags": [
-          "owner-controller"
-        ],
-        "operationId": "add_3",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OwnerDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/auth/signup": {
-      "post": {
-        "tags": [
-          "auth-controller"
-        ],
-        "operationId": "signUp",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SignUpRequestDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/SignUpResponseDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/auth/signin": {
-      "post": {
-        "tags": [
-          "auth-controller"
-        ],
-        "operationId": "signIn",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AuthRequestDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/AuthResponseDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/appointments/vet={vetId}": {
-      "post": {
-        "tags": [
-          "appointment-controller"
-        ],
-        "operationId": "addAppointmentToVet",
-        "parameters": [
-          {
-            "name": "vetId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "add_appointment",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "appointment-controller"
-        ],
-        "operationId": "removeAppointmentFromVet",
-        "parameters": [
-          {
-            "name": "vetId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "remove_appointment",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/appointments/save": {
-      "post": {
-        "tags": [
-          "appointment-controller"
-        ],
-        "operationId": "add_4",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AppointmentDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/AppointmentDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/vets/change/{id}": {
-      "patch": {
-        "tags": [
-          "vet-controller"
-        ],
-        "operationId": "change",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VetDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/VetDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/treatments/appointment={appId}": {
-      "patch": {
-        "tags": [
-          "treatment-controller"
-        ],
-        "operationId": "addTreatmentToAppointment",
-        "parameters": [
-          {
-            "name": "appId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "add_treatment",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/pets/change/{id}": {
-      "patch": {
-        "tags": [
-          "pet-controller"
-        ],
-        "operationId": "change_1",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AnyPetDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/AnyPetDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/owners/change/{id}": {
-      "patch": {
-        "tags": [
-          "owner-controller"
-        ],
-        "operationId": "change_2",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OwnerDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/OwnerDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/appointments/change/{id}": {
-      "patch": {
-        "tags": [
-          "appointment-controller"
-        ],
-        "operationId": "change_3",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AppointmentDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/AppointmentDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/vets": {
-      "get": {
-        "tags": [
-          "vet-controller"
-        ],
-        "operationId": "getVets",
-        "parameters": [
-          {
-            "name": "exp",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/VetDTO"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/vets/{id}": {
-      "get": {
-        "tags": [
-          "vet-controller"
-        ],
-        "operationId": "getVet",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/VetDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/treatments": {
-      "get": {
-        "tags": [
-          "treatment-controller"
-        ],
-        "operationId": "getAll",
-        "parameters": [
-          {
-            "name": "date",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "month",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "year",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TreatmentDTO"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/treatments/{id}": {
-      "get": {
-        "tags": [
-          "treatment-controller"
-        ],
-        "operationId": "getTreatment",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/TreatmentDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/treatments/by-pet": {
-      "get": {
-        "tags": [
-          "treatment-controller"
-        ],
-        "operationId": "getByPetId",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TreatmentDTO"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/pets": {
-      "get": {
-        "tags": [
-          "pet-controller"
-        ],
-        "operationId": "getAll_1",
-        "parameters": [
-          {
-            "name": "ownerId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AnyPetDTO"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/pets/{id}": {
-      "get": {
-        "tags": [
-          "pet-controller"
-        ],
-        "operationId": "getPet",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/PetDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/owners": {
-      "get": {
-        "tags": [
-          "owner-controller"
-        ],
-        "operationId": "getAll_2",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/OwnerDTO"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/owners/{id}": {
-      "get": {
-        "tags": [
-          "owner-controller"
-        ],
-        "operationId": "getOwner",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/OwnerDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/appointments": {
-      "get": {
-        "tags": [
-          "appointment-controller"
-        ],
-        "operationId": "getAll_3",
-        "parameters": [
-          {
-            "name": "vetId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "petId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "date",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "format": "date"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AppointmentDTO"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/appointments/{id}": {
-      "get": {
-        "tags": [
-          "appointment-controller"
-        ],
-        "operationId": "getAppointment",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/AppointmentDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/vets/{id}/appointments": {
-      "delete": {
-        "tags": [
-          "vet-controller"
-        ],
-        "operationId": "deleteAllAppointmentsFromVet",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/vets/delete/{id}": {
-      "delete": {
-        "tags": [
-          "vet-controller"
-        ],
-        "operationId": "delete",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/treatments/delete/{id}": {
-      "delete": {
-        "tags": [
-          "treatment-controller"
-        ],
-        "operationId": "delete_1",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        }
-      }
-    },
-    "/pets/delete/{id}": {
-      "delete": {
-        "tags": [
-          "pet-controller"
-        ],
-        "operationId": "delete_2",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/owners/delete/{id}": {
-      "delete": {
-        "tags": [
-          "owner-controller"
-        ],
-        "operationId": "delete_3",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/appointments/delete/{id}": {
-      "delete": {
-        "tags": [
-          "appointment-controller"
-        ],
-        "operationId": "delete_4",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "AnyAppointmentDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "appointmentDate": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "VetDTO": {
-        "required": [
-          "email",
-          "experience",
-          "name",
-          "phone",
-          "specialization"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "email": {
-            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
-            "type": "string"
-          },
-          "phone": {
-            "pattern": "^(?:\\+38)?(?:\\(044\\)[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|044[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|044[0-9]{7})$",
-            "type": "string"
-          },
-          "specialization": {
-            "type": "string"
-          },
-          "experience": {
-            "maximum": 70,
-            "minimum": 0,
-            "type": "integer",
-            "format": "int32"
-          },
-          "appointments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AnyAppointmentDTO"
-            }
-          }
-        }
-      },
-      "TreatmentDTO": {
-        "required": [
-          "description",
-          "petId"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "appointmentId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "petId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "description": {
-            "type": "string"
-          },
-          "cost": {
-            "type": "number",
-            "format": "double"
-          },
-          "treatmentDate": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "AnyTreatmentDTO": {
-        "required": [
-          "description"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "treatmentDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "description": {
-            "type": "string"
-          }
-        }
-      },
-      "AnyPetDTO": {
-        "required": [
-          "age",
-          "name",
-          "ownerId",
-          "type"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "breed": {
-            "type": "string"
-          },
-          "age": {
-            "minimum": 0,
-            "type": "integer",
-            "format": "int32"
-          },
-          "ownerId": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "OwnerDTO": {
-        "required": [
-          "email",
-          "firstName",
-          "lastName",
-          "phone"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "email": {
-            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
-            "type": "string"
-          },
-          "phone": {
-            "pattern": "^(?:\\+38)?(?:\\(044\\)[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|044[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|044[0-9]{7})$",
-            "type": "string"
-          }
-        }
-      },
-      "SignUpRequestDTO": {
-        "type": "object",
-        "properties": {
-          "username": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "role": {
-            "type": "string"
-          }
-        }
-      },
-      "SignUpResponseDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "username": {
-            "type": "string"
-          },
-          "registeredAt": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "AuthRequestDTO": {
-        "required": [
-          "password",
-          "username"
-        ],
-        "type": "object",
-        "properties": {
-          "username": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          }
-        }
-      },
-      "AuthResponseDTO": {
-        "type": "object",
-        "properties": {
-          "accessToken": {
-            "type": "string"
-          },
-          "refreshToken": {
-            "type": "string"
-          }
-        }
-      },
-      "AppointmentDTO": {
-        "required": [
-          "petId",
-          "vetId"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "petId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "vetId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "appointmentDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "treatment": {
-            "$ref": "#/components/schemas/AnyTreatmentDTO"
-          }
-        }
-      },
-      "PetDTO": {
-        "required": [
-          "age",
-          "name",
-          "ownerId",
-          "type"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "breed": {
-            "type": "string"
-          },
-          "age": {
-            "minimum": 0,
-            "type": "integer",
-            "format": "int32"
-          },
-          "ownerId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "appointments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AppointmentDTO"
-            }
-          },
-          "treatments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TreatmentDTO"
-            }
-          }
-        }
-      }
-    }
-  }
-}
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /vets/save:
+    post:
+      tags:
+        - vet-controller
+      operationId: add
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VetDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VetDTO'
+  /treatments/save:
+    post:
+      tags:
+        - treatment-controller
+      operationId: add_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TreatmentDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AnyTreatmentDTO'
+  /pets/save:
+    post:
+      tags:
+        - pet-controller
+      operationId: add_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnyPetDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AnyPetDTO'
+  /owners/save:
+    post:
+      tags:
+        - owner-controller
+      operationId: add_3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OwnerDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+  /auth/signup:
+    post:
+      tags:
+        - auth-controller
+      operationId: signUp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SignUpResponseDTO'
+  /auth/signin:
+    post:
+      tags:
+        - auth-controller
+      operationId: signIn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRequestDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthResponseDTO'
+  /appointments/vet={vetId}:
+    post:
+      tags:
+        - appointment-controller
+      operationId: addAppointmentToVet
+      parameters:
+        - name: vetId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: add_appointment
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+        - appointment-controller
+      operationId: removeAppointmentFromVet
+      parameters:
+        - name: vetId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: remove_appointment
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /appointments/save:
+    post:
+      tags:
+        - appointment-controller
+      operationId: add_4
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppointmentDTO'
+  /vets/change/{id}:
+    patch:
+      tags:
+        - vet-controller
+      operationId: change
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VetDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VetDTO'
+  /treatments/appointment={appId}:
+    patch:
+      tags:
+        - treatment-controller
+      operationId: addTreatmentToAppointment
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: add_treatment
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /pets/change/{id}:
+    patch:
+      tags:
+        - pet-controller
+      operationId: change_1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnyPetDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AnyPetDTO'
+  /owners/change/{id}:
+    patch:
+      tags:
+        - owner-controller
+      operationId: change_2
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OwnerDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OwnerDTO'
+  /appointments/change/{id}:
+    patch:
+      tags:
+        - appointment-controller
+      operationId: change_3
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppointmentDTO'
+  /vets:
+    get:
+      tags:
+        - vet-controller
+      operationId: getVets
+      parameters:
+        - name: exp
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VetDTO'
+  /vets/{id}:
+    get:
+      tags:
+        - vet-controller
+      operationId: getVet
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VetDTO'
+  /treatments:
+    get:
+      tags:
+        - treatment-controller
+      operationId: getAll
+      parameters:
+        - name: date
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: month
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: year
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreatmentDTO'
+  /treatments/{id}:
+    get:
+      tags:
+        - treatment-controller
+      operationId: getTreatment
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TreatmentDTO'
+  /treatments/by-pet:
+    get:
+      tags:
+        - treatment-controller
+      operationId: getByPetId
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreatmentDTO'
+  /pets:
+    get:
+      tags:
+        - pet-controller
+      operationId: getAll_1
+      parameters:
+        - name: ownerId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnyPetDTO'
+  /pets/{id}:
+    get:
+      tags:
+        - pet-controller
+      operationId: getPet
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PetDTO'
+  /owners:
+    get:
+      tags:
+        - owner-controller
+      operationId: getAll_2
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OwnerDTO'
+  /owners/{id}:
+    get:
+      tags:
+        - owner-controller
+      operationId: getOwner
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OwnerDTO'
+  /appointments:
+    get:
+      tags:
+        - appointment-controller
+      operationId: getAll_3
+      parameters:
+        - name: vetId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: petId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AppointmentDTO'
+  /appointments/{id}:
+    get:
+      tags:
+        - appointment-controller
+      operationId: getAppointment
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppointmentDTO'
+  /vets/{id}/appointments:
+    delete:
+      tags:
+        - vet-controller
+      operationId: deleteAllAppointmentsFromVet
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /vets/delete/{id}:
+    delete:
+      tags:
+        - vet-controller
+      operationId: delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /treatments/delete/{id}:
+    delete:
+      tags:
+        - treatment-controller
+      operationId: delete_1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "204":
+          description: No Content
+  /pets/delete/{id}:
+    delete:
+      tags:
+        - pet-controller
+      operationId: delete_2
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /owners/delete/{id}:
+    delete:
+      tags:
+        - owner-controller
+      operationId: delete_3
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /appointments/delete/{id}:
+    delete:
+      tags:
+        - appointment-controller
+      operationId: delete_4
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    AnyAppointmentDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        appointmentDate:
+          type: string
+          format: date-time
+    VetDTO:
+      required:
+        - email
+        - experience
+        - name
+        - phone
+        - specialization
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
+          pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          type: string
+          example: "email@example.com"
+        phone:
+          pattern: "^(?:\\+38)?(?:\\(044\\)[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|044[\
+            \ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|044[0-9]{7})$"
+          type: string
+          example: "+380123456789"
+        specialization:
+          type: string
+        experience:
+          maximum: 70
+          minimum: 0
+          type: integer
+          format: int32
+        appointments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnyAppointmentDTO'
+    TreatmentDTO:
+      required:
+        - description
+        - petId
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        appointmentId:
+          type: integer
+          format: int64
+        petId:
+          type: integer
+          format: int64
+        description:
+          type: string
+        cost:
+          type: number
+          format: double
+        treatmentDate:
+          type: string
+          format: date-time
+    AnyTreatmentDTO:
+      required:
+        - description
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        treatmentDate:
+          type: string
+          format: date-time
+        description:
+          type: string
+    AnyPetDTO:
+      required:
+        - age
+        - name
+        - ownerId
+        - type
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        type:
+          type: string
+        breed:
+          type: string
+        age:
+          minimum: 0
+          type: integer
+          format: int32
+        ownerId:
+          type: integer
+          format: int64
+    OwnerDTO:
+      required:
+        - email
+        - firstName
+        - lastName
+        - phone
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          type: string
+          example: "email@example.com"
+        phone:
+          pattern: "^(?:\\+38)?(?:\\(044\\)[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|044[\
+            \ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|044[0-9]{7})$"
+          type: string
+          example: "+380123456789"
+    SignUpRequestDTO:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+    SignUpResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        registeredAt:
+          type: string
+          format: date-time
+    AuthRequestDTO:
+      required:
+        - password
+        - username
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    AuthResponseDTO:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+    AppointmentDTO:
+      required:
+        - petId
+        - vetId
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        petId:
+          type: integer
+          format: int64
+        vetId:
+          type: integer
+          format: int64
+        appointmentDate:
+          type: string
+          format: date-time
+        treatment:
+          $ref: '#/components/schemas/AnyTreatmentDTO'
+    PetDTO:
+      required:
+        - age
+        - name
+        - ownerId
+        - type
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        type:
+          type: string
+        breed:
+          type: string
+        age:
+          minimum: 0
+          type: integer
+          format: int32
+        ownerId:
+          type: integer
+          format: int64
+        appointments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppointmentDTO'
+        treatments:
+          type: array
+          items:
+            $ref: '#/components/schemas/TreatmentDTO'
