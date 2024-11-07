@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class PetController {
 
     private final PetService petService;
 
+    @Secured("ADMIN")
     @GetMapping
     public ResponseEntity<List<AnyPetDTO>> getAll(@RequestParam(required = false) Long ownerId) {
         List<AnyPetDTO> pets;
@@ -48,6 +50,7 @@ public class PetController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(updatedPet);
     }
 
+    @Secured("ADMIN")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         petService.deletePet(id);

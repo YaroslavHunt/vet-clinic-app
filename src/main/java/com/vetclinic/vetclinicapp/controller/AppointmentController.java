@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ public class AppointmentController {
 
     private final AppointmentService appointmentService;
 
+    @Secured("ADMIN")
     @GetMapping
     public ResponseEntity<List<AppointmentDTO>> getAll(
             @RequestParam(required = false) Long vetId,
@@ -62,6 +64,7 @@ public class AppointmentController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
+    @Secured("ADMIN")
     @DeleteMapping("/vet={vetId}")
     public ResponseEntity<Void> removeAppointmentFromVet(
             @PathVariable Long vetId,
@@ -70,6 +73,7 @@ public class AppointmentController {
         return ResponseEntity.status(NO_CONTENT).build();
     }
 
+    @Secured("ADMIN")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         appointmentService.deleteAppointment(id);

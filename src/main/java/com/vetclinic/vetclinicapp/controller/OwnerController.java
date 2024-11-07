@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class OwnerController {
 
     private final OwnerService ownerService;
 
+    @Secured("ADMIN")
     @GetMapping
     public ResponseEntity<List<OwnerDTO>> getAll() {
         return ownerService.findAll().isEmpty()
@@ -42,6 +44,7 @@ public class OwnerController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(owner);
     }
 
+    @Secured("ADMIN")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         ownerService.deleteOwner(id);

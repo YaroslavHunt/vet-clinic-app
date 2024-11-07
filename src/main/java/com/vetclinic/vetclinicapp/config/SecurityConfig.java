@@ -56,6 +56,7 @@ public class SecurityConfig {
                 .cors(CorsConfigurer::disable)
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/treatments", "/treatments/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())

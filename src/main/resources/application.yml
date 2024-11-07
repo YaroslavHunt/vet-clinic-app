@@ -27,7 +27,7 @@ spring:
           starttls:
             enable: true
 jwt:
-  secret: "SUPER_SECRET_KEY_ASsc28GA2Fvo6Rg234963nf871"
+  secret: ${secret}
   access-token:
     ttl-millis: 900000
   refresh-token:
