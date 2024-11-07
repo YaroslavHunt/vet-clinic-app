@@ -1,7 +1,7 @@
 package com.vetclinic.vetclinicapp.mapper;
 
 import com.vetclinic.vetclinicapp.dto.appointment.AppointmentDTO;
-import com.vetclinic.vetclinicapp.models.Appointment;
+import com.vetclinic.vetclinicapp.entity.Appointment;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

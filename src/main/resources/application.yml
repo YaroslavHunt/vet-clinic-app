@@ -8,7 +8,7 @@ spring:
     password: "root"
 
   jpa:
-#    show-sql: true
+    #    show-sql: true
     hibernate:
       ddl-auto: update
     properties:
@@ -26,3 +26,9 @@ spring:
           auth: true
           starttls:
             enable: true
+jwt:
+  secret: "SUPER_SECRET_KEY_ASsc28GA2Fvo6Rg234963nf871"
+  access-token:
+    ttl-millis: 900000
+  refresh-token:
+    ttl-millis: 604800000

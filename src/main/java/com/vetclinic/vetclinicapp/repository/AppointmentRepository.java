@@ -1,6 +1,6 @@
 package com.vetclinic.vetclinicapp.repository;
 
-import com.vetclinic.vetclinicapp.models.Appointment;
+import com.vetclinic.vetclinicapp.entity.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

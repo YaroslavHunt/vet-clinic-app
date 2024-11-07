@@ -1,6 +1,6 @@
 package com.vetclinic.vetclinicapp.repository;
 
-import com.vetclinic.vetclinicapp.models.Pet;
+import com.vetclinic.vetclinicapp.entity.Pet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

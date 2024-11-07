@@ -1,6 +1,6 @@
 package com.vetclinic.vetclinicapp.repository;
 
-import com.vetclinic.vetclinicapp.models.Vet;
+import com.vetclinic.vetclinicapp.entity.Vet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

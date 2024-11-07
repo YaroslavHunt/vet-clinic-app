@@ -1,4 +1,4 @@
-package com.vetclinic.vetclinicapp.models;
+package com.vetclinic.vetclinicapp.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,7 +1,7 @@
 package com.vetclinic.vetclinicapp.mapper;
 
 import com.vetclinic.vetclinicapp.dto.owner.OwnerDTO;
-import com.vetclinic.vetclinicapp.models.Owner;
+import com.vetclinic.vetclinicapp.entity.Owner;
 import org.mapstruct.Mapper;
 
 @Mapper

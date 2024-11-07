@@ -1,19 +1,21 @@
-package com.vetclinic.vetclinicapp.models;
+package com.vetclinic.vetclinicapp.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
-public class Vet {
+public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String firstName;
+
+    private String lastName;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -21,11 +23,6 @@ public class Vet {
     @Column(nullable = false, unique = true)
     private String phone;
 
-    @Column(nullable = false)
-    private String specialization;
-
-    private Integer experience;
-
-    @OneToMany(mappedBy = "vet", cascade = CascadeType.ALL)
-    private List<Appointment> appointments;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Pet> pets;
 }
