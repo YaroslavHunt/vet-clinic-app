@@ -656,8 +656,6 @@ components:
           minimum: 0
           type: integer
           format: int32
-        appointments:
-          type: array
           items:
             $ref: '#/components/schemas/AnyAppointmentDTO'
     TreatmentDTO:
