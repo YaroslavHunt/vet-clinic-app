@@ -5,6 +5,7 @@ import com.vetclinic.vetclinicapp.exception.GlobalExceptionHandler;
 import com.vetclinic.vetclinicapp.mapper.VetMapper;
 import com.vetclinic.vetclinicapp.entity.Appointment;
 import com.vetclinic.vetclinicapp.entity.Vet;
+import com.vetclinic.vetclinicapp.repository.AppointmentRepository;
 import com.vetclinic.vetclinicapp.repository.VetRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 public class VetService {
 
     private final VetRepository vetRepository;
+    private final AppointmentRepository appointmentRepository;
     private final VetMapper vetMapper;
 
     public List<VetDTO> findAll() {
@@ -51,10 +53,14 @@ public class VetService {
     @SneakyThrows
     public VetDTO addVet(VetDTO vetDTO) {
         if (vetRepository.existsByEmail(vetDTO.getEmail())) {
-            throw new SQLIntegrityConstraintViolationException("Email already exists: " + vetDTO.getEmail());
+            throw new GlobalExceptionHandler.CustomException(
+                    "Email already exists: " + vetDTO.getEmail(),
+                    HttpStatus.BAD_REQUEST);
         }
         if (vetRepository.existsByPhone(vetDTO.getPhone())) {
-            throw new SQLIntegrityConstraintViolationException("Phone number already exists: " + vetDTO.getPhone());
+            throw new GlobalExceptionHandler.CustomException(
+                    "Phone number already exists: " + vetDTO.getPhone(),
+                    HttpStatus.BAD_REQUEST);
         }
 
         Vet vet = vetMapper.toEntity(vetDTO);
@@ -88,14 +94,9 @@ public class VetService {
                         String.format("Vet with id %d not found", vetId),
                         HttpStatus.NOT_FOUND));
 
-        if (vet.getAppointments().isEmpty()) {
-            throw new GlobalExceptionHandler.CustomException(
-                    "No appointments to delete for this vet",
-                    HttpStatus.NO_CONTENT);
-        }
-
         for (Appointment appointment : vet.getAppointments()) {
             appointment.setVet(null);
+            appointmentRepository.save(appointment);
         }
 
         vet.getAppointments().clear();

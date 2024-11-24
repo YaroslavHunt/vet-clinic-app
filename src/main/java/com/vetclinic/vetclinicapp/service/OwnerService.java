@@ -71,6 +71,10 @@ public class OwnerService {
     }
 
     public void deleteOwner(Long id) {
+        ownerRepository.findById(id)
+                .orElseThrow(() -> new GlobalExceptionHandler.CustomException(
+                        String.format("Owner with id %d not found", id),
+                        HttpStatus.NOT_FOUND));
         ownerRepository.deleteById(id);
     }
 }
