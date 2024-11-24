@@ -1,10 +1,10 @@
 package com.vetclinic.vetclinicapp.service;
 
 import com.vetclinic.vetclinicapp.dto.vet.VetDTO;
-import com.vetclinic.vetclinicapp.exception.GlobalExceptionHandler;
-import com.vetclinic.vetclinicapp.mapper.VetMapper;
 import com.vetclinic.vetclinicapp.entity.Appointment;
 import com.vetclinic.vetclinicapp.entity.Vet;
+import com.vetclinic.vetclinicapp.exception.GlobalExceptionHandler;
+import com.vetclinic.vetclinicapp.mapper.VetMapper;
 import com.vetclinic.vetclinicapp.repository.AppointmentRepository;
 import com.vetclinic.vetclinicapp.repository.VetRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

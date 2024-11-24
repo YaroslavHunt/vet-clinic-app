@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
@@ -35,6 +36,7 @@ class TreatmentServiceTest {
     @Mock
     private PetRepository petRepository;
 
+    @Spy
     private final TreatmentMapper treatmentMapper = Mappers.getMapper(TreatmentMapper.class);
 
     private TreatmentService treatmentService;

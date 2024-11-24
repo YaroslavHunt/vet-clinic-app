@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
@@ -25,6 +26,7 @@ class OwnerServiceTest {
     @Mock
     private OwnerRepository ownerRepository;
 
+    @Spy
     private final OwnerMapper ownerMapper = Mappers.getMapper(OwnerMapper.class);
 
     private OwnerService ownerService;

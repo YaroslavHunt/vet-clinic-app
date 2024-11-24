@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
@@ -29,6 +30,7 @@ class PetServiceTest {
     @Mock
     private OwnerRepository ownerRepository;
 
+    @Spy
     private final PetMapper petMapper = Mappers.getMapper(PetMapper.class);
 
     private PetService petService;
